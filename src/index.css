@@ -1,13 +1,228 @@
-body {
+*,
+*::after,
+*::before {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: inherit;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+
+  @media (max-width: 600px) {
+    font-size: 56.25%;
+  }
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.4rem;
+  background-color: #212b2b;
+
+  min-height: 100vh;
+  color: #fff;
+  padding-bottom: 4rem;
+  line-height: 1.4;
+}
+
+.app {
+  display: grid;
+  grid-template-rows: repeat(2, min-content);
+  grid-template-columns:
+    minmax(1.5rem, 1fr) repeat(8, minmax(min-content, 14rem))
+    minmax(1.5rem, 1fr);
+  row-gap: 7rem;
+}
+
+.heading {
+  text-align: center;
+
+  font-size: 4rem;
+  margin-top: 4rem;
+  display: block;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.7);
+  padding-bottom: 3px;
+  grid-row: 1 / span 1;
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+
+.heading-2 {
+  font-size: 2.5rem;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
+  justify-content: center;
+
+  gap: 5rem;
+  grid-row: 2 / span 1;
+  grid-column: 2 / 10;
+}
+
+.lorem-options {
+  display: grid;
+  grid-template-rows: 4rem 1.2rem min-content 1.2rem min-content 1.2rem min-content 1.2rem min-content 5rem;
+  justify-items: start;
+  row-gap: 1rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+
+  @media (max-width: 780px) {
+    border: none;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.number-input {
+  width: 5rem;
+  height: 3rem;
+  text-align: center;
+  margin-right: 1rem;
+}
+
+.btn {
+  padding: 0.3rem 1rem;
+  align-self: center;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.btn--value:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.btn--copy {
+  background-color: rgb(243, 176, 33);
+  font-weight: bold;
+  color: #fff;
+  padding: 1rem 2rem !important;
+  justify-self: center;
+  transition: all 0.1s;
+}
+
+.btn--copy:active {
+  background-color: rgba(243, 176, 33, 0.8);
+}
+
+.options-btn {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.1s;
+  align-self: end;
+}
+
+.options-btn:active {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.options-list {
+  display: grid;
+  grid-template-columns: max-content;
+  gap: 1rem;
+  justify-items: start;
+
+  @media (max-width: 780px) {
+    grid-template-columns: repeat(2, minmax(21.5rem, 1fr));
+  }
+}
+
+.select {
+  border: none;
+  border-radius: 4px;
+}
+
+.select:focus {
+  outline: none;
+  border-radius: 4px;
+}
+
+.checkbox {
+  display: none;
+}
+
+.checkbox:checked ~ .toggler {
+  color: #fff;
+}
+
+.checkbox:checked ~ .toggler .toggler-btn {
+  background-color: rgba(255, 255, 255);
+}
+
+.checkbox:checked ~ .toggler .toggler-btn span {
+  margin-left: 1.6rem;
+  background-color: rgba(0, 0, 0);
+}
+
+.options-list {
+  list-style: none;
+}
+
+.toggler {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.7rem;
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.2s ease-out;
+}
+
+.toggler-btn {
+  display: block;
+  padding: 0.3rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50px;
+  width: 4.5rem;
+  height: 2rem;
+  transition: inherit;
+}
+
+.toggler-btn span {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 2.3rem;
+  height: 100%;
+  border-radius: 50px;
+  transition: inherit;
+}
+
+.text {
+  display: grid;
+  grid-template-rows: 47rem min-content;
+  row-gap: 4rem;
+}
+
+.textarea {
+  border: none;
+  border-radius: 4px;
+  font-family: inherit;
+  padding: 0.5rem 1rem;
+  overflow-y: auto;
+  cursor: default;
+  background-color: #fff;
+  color: #000;
+  font-size: 1.8rem;
+  display: flex;
+  flex-flow: column;
+  gap: 2rem;
+}
+
+.textarea > *:hover {
+  cursor: text;
+}
+
+.textarea ol,
+.textarea ul,
+.textarea dl {
+  padding-left: 2rem;
 }
